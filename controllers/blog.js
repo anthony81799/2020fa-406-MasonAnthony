@@ -5,25 +5,27 @@ module.exports.blogAdd = function(req, res) {
 
 /* GET blogList page */
 module.exports.blogList = function(req, res) {
-	res.render('blogList', {title: 'Blog List' },
-	blogs: [{
-		blog-title: 'Blog1',
-		blog-text: 'This is a placeholder blog.'
-	},
+	res.render('blogList', {title: 'Blog List', blogs:
+		[{
+		blogTitle: 'Blog1',
+		blogText: 'This is a placeholder blog.'
+		},
+
 		{
-		blog-title: 'Test',
-		blog-text: 'Blog test.'
-	}
+		blogTitle: 'Test',
+		blogText: 'Blog test.'
+		},
+
 		{
-		blog-title: 'BlogTest',
-		blog-text: 'Final test blog.'
-	}]
-	);
+		blogTitle: 'BlogTest',
+		blogText: 'Final test blog.'
+		}]
+	});
 };
 
 /* GET blogEdit page */
 module.exports.blogEdit = function(req, res) {
-	res.render('blogList', {title: 'Blog Edit' });
+	res.render('blogEdit', {title: 'Blog Edit' });
 };
 
 /* GET blogDelete page */
