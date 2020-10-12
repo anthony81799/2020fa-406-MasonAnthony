@@ -7,17 +7,17 @@
 	</div>
 	<div class = 'card-body'>
 		<h5 class = 'card-title'><%= blog.blogTitle %></h5>
-		<p><%= formatDate(blog.createdOn); %></p>
+		<p><%= blog.createdOn; %></p>
 	</div>
 	<div class = 'card-footer'>
 		<div class = 'row'>
 			<div class = 'col-sm'>
 				<ul class = 'nav justify-content-end nav-pills card-header-pills'>
 					<li class = 'nav-item'>
-						<a class = 'nav-link' href = '/blogEdit/<%= blog._id %>'><i class = 'fas fa-edit'></i></a>
+						<a class = 'nav-link' href = "/blogEdit/<%= blog._id %>"><i class = 'fas fa-edit'></i></a>
 					</li>
 					<li class = 'nav-item'>
-						<a class ='nav-link' href = '/blogDelete/<%= blog._id %>'><i class = 'fas fa-trash-alt'></i></a>
+						<a class ='nav-link' href = "/blogDelete/<%= blog._id %>"><i class = 'fas fa-trash-alt'></i></a>
 					</li>
 				</ul>
 			</div>
