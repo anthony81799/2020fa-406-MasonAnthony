@@ -2,13 +2,12 @@
 	<div class = 'card-header'>
 	<div class = 'row'>
 		<div class = 'col-sm'>
-			<p><%= formatDate(blog.createdOn); %></p>
 		</div>
 	</div>
 	</div>
 	<div class = 'card-body'>
 		<h5 class = 'card-title'><%= blog.blogTitle %></h5>
-		<p class = 'card-text'><%= blog.blogText %></p>
+		<p><%= formatDate(blog.createdOn); %></p>
 	</div>
 	<div class = 'card-footer'>
 		<div class = 'row'>
