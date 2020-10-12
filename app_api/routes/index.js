@@ -3,10 +3,10 @@ var router = express.Router();
 var ctrlBlogs = require('../controllers/blogs');
 
 /* Request for blogs */
-router.get('/api/blogs', ctrlBlogs.blogGetAll);
-router.get('/api/blogs/:blogid', ctrlBlogs.blogGetOne);
-router.post('/api/blogs', ctrlBlogs.blogCreate);
-router.put('/api/blogs/:blogid', ctrlBlogs.blogUpdateOne);
-router.delete('/api/blogs/:blogid', ctrlBlogs.blogDeleteOne);
+router.get('/blogs', ctrlBlogs.blogGetAll);
+router.get('/blogs/:blogid', ctrlBlogs.blogGetOne);
+router.post('/blogs', ctrlBlogs.blogCreate);
+router.put('/blogs/:blogid', ctrlBlogs.blogUpdateOne);
+router.delete('/blogs/:blogid', ctrlBlogs.blogDeleteOne);
 
 module.exports = router;

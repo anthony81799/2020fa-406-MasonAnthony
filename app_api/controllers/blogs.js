@@ -12,7 +12,7 @@ module.exports.blogGetOne = function (req, res) {
 		Blog
 			.findById(req.params.blogid)
 			.exec(function(err, blog) {
-				if (!location) {
+				if (!blog) {
 					sendJSONresponse(res, 404, {"message": "blogid not found"});
 					return;
 				} else if (err) {
@@ -47,14 +47,14 @@ module.exports.blogGetAll = function(req, res) {
 			sendJSONresponse(res, 200, buildBlogList(req, res, results));
 		});
 
-});
+};
 
 var buildBlogList = function(req, res, results) {
 	var blogs = [];
 	results.forEach(function(obj) {
 		blogs.push({
 			blogTitle: obj.blogTitle,
-			blogText: obj.blogText;
+			blogText: obj.blogText,
 			createdOn: obj.createdOn,
 			_id: obj._id
 		});
@@ -84,17 +84,17 @@ module.exports.blogCreate = function(req, res) {
 
 /* Update one blog entry */
 module.exports.blogUpdateOne = function(req, res) {
-	console.log("Updating a blog entry with id of " + req.params.id);
+	console.log("Updating a blog entry with id of " + req.params.blogid);
 	console.log(req.body);
 	Blog
 		.findOneAndUpdate(
-			{ _id: req.params.id },
+			{ _id: req.params.blogid },
 			{ $set: {"blogTitle": req.body.blogTitle, "blogText": req.body.blogText, "createdOn": req.body.createdOn}},
 			function(err, response) {
 				if (err) {
 					sendJSONresponse(res, 400, err);
 				} else {
-					sendJSONresponse(res, 201, response);
+					sendJSONresponse(res, 200, response);
 				}
 			}
 	);
@@ -102,10 +102,10 @@ module.exports.blogUpdateOne = function(req, res) {
 
 /*DELETE one blog */
 module.exports.blogDeleteOne = function(req, res) {
-	console.log("Deleting blog entry with id of " + req.params.id);
+	console.log("Deleting blog entry with id of " + req.params.blogid);
 	console.log(req.body);
 	Blog
-		.findByIdAndRemove(req.params.id)
+		.findByIdAndRemove(req.params.blogid)
 		.exec (
 			function(err, response) {
 				if (err) {
