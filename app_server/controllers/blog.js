@@ -125,7 +125,7 @@ module.exports.editPost = function(req, res){
 	request(
 		requestOptions,
 		function(err, response, body){
-			if(response.statusCode === 200){
+			if(response.statusCode === 201){
 				res.redirect('/blogList');
 			} else{
 				_showError(req, res, response.statusCode);
