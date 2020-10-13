@@ -7,7 +7,7 @@
 	</div>
 	<div class = 'card-body'>
 		<h5 class = 'card-title'><%= blog.blogTitle %></h5>
-		<p><%= blog.createdOn; %></p>
+		<p><%= moment(blog.createdOn).format('MMMM DD[,] YYYY[,] h[:]mm a') %></p>
 	</div>
 	<div class = 'card-footer'>
 		<div class = 'row'>

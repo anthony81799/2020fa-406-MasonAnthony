@@ -5,7 +5,7 @@ var blogSchema = new mongoose.Schema({
 	blogText: String,
 	createdOn: {
 		type: Date,
-		"default": Date.now
+		"default": Date.now()
 	}
 });
 
