@@ -9,16 +9,11 @@
 		  <link rel="stylesheet" href="/css/fontawesome-all.css">
 	  </head>
 	  <body>
-		  <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-primary">
-			  <a class="navbar-brand" href="#/">My Blog</a>
-			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-				  <div class="navbar-nav">
-					  <a class="nav-item nav-link active" href="#/blogList">List Blogs</a>
-					  <a class="nav-item nav-link active" href="#/blogAdd">Add Blog</a>
-				  </div>
-			  </div>
-		  </nav>
-		  
+		  <!-- Navigation Directive -->
+		  <div ng-controller="NavigationController">
+			  <navigation></navigation>
+		  </div>
+
 		  <script type="text/ng-template" id="pages/home.html">
 			  <p></p>
 			  <h2>{{vm.pageHeader.title}}</h2>
@@ -38,10 +33,10 @@
 						<div class = "col-sm">
 							<ul class="nav justify-content-end nav-pills card-header-pills">
 								<li class="nav-item">
-									<a class="nav-link" href="#/blogEdit/{{blog._id}}"> <i class="fas fa-edit"></i></a>
+									<a ng-show="vm.isLoggedIn()" class="nav-link" href="#/blogEdit/{{blog._id}}"> <i class="fas fa-edit"></i></a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#/blogDelete/{{blog._id}}"> <i class="fas fa-trash-alt"></i></a>
+									<a ng-show="vm.isLoggedIn()"class="nav-link" href="#/blogDelete/{{blog._id}}"> <i class="fas fa-trash-alt"></i></a>
 								</li>
 							</ul>
 						</div>
@@ -95,5 +90,7 @@
 		  </script>
 		  <div ng-view></div>
 		  <script src="/js/blogger.js"></script>
+		  <script src="/nav/navigation.js"></script>
+		  <script src="/auth/authentication.js"></script>
 	  </body>
 </html>

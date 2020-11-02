@@ -33,6 +33,18 @@ app. config(function($routeProvider) {
 			controller:'DeleteController',
 			controllerAs:'vm'
 		})
+
+		.when('/register', {
+			templateUrl: 'common/auth/register.view.html',
+			controller: 'RegisterController',
+			controllerAs: 'vm'
+		})
+
+		.when('/login', {
+			templateUrl: 'common/auth/login.view.html',
+			controller: 'LoginController',
+			controllerAs: 'vm'
+		})
 		
 		.otherwise({redirectTo: '/'});
 });
@@ -56,16 +68,16 @@ function blogGetOne($http, _id) {
 	return $http.get('/api/blogs/' + _id);
 }
 
-function blogCreate($http, data) {
-	return $http.post('api/blogs/', data);
+function blogCreate($http, authentication, data) {
+	return $http.post('api/blogs/', data, { headers: { Authorization: 'Bearer ' + authentication.getToken() }});
 }
 
-function blogUpdateOne($http, _id, data) {
-	return $http.put('/api/blogs/' + _id, data);
+function blogUpdateOne($http, authentication, _id, data) {
+	return $http.put('/api/blogs/' + _id, data, { headers: { Authorization: 'Bearer ' + authentication.getToken() }});
 }
 
-function blogDeleteOne($http, _id) {
-	return $http.delete('/api/blogs/' + _id);
+function blogDeleteOne($http, authentication, _id) {
+	return $http.delete('/api/blogs/' + _id, { headers: {Authorization: 'Bearer ' + authentication.getToken() }});
 }
 
 /** Controllers **/
@@ -77,10 +89,14 @@ app.controller('HomeController', function HomeController() {
 	vm.message = "Welcome to my site!";
 });
 
-app.controller('ListController', function ListController($http) {
+app.controller('ListController',['$http','authentication', function ListController($http, authentication) {
 	var vm = this;
 	vm.pageHeader = {
 		title : 'Blog List'
+	};
+
+	vm.isLoggedIn = function() {
+		return authentication.isLoggedIn();
 	};
 
 	blogGetAll($http)
@@ -91,7 +107,7 @@ app.controller('ListController', function ListController($http) {
 		.error(function (e) {
 			vm.message = "Could not get list of blogs.";
 		});
-});
+}]);
 
 app.controller('AddController', ['$http', '$routeParams', '$state', function AddController($http, $routeParams, $state) {
 	var vm = this;
@@ -113,7 +129,7 @@ app.controller('AddController', ['$http', '$routeParams', '$state', function Add
 			.error(function(e) {
 				vm.message = "Could not create blog.";
 			});
-	}
+	};
 }]);
 
 app.controller('EditController', [ '$http', '$routeParams', '$state', function EditController($http, $routeParams, $state) {
@@ -146,7 +162,7 @@ app.controller('EditController', [ '$http', '$routeParams', '$state', function E
 			.error(function(e) {
 				vm.message = "Could not update blog."
 			});
-	}
+	};
 }]);
 
 app.controller('DeleteController',['$http','$routeParams','$state',function DeleteController($http,$routeParams,$state) {
@@ -179,9 +195,9 @@ app.controller('DeleteController',['$http','$routeParams','$state',function Dele
 			.error(function(e){
 				vm.message = "Could not delete blog."
 			});
-	}
+	};
 
 	vm.cancel = function() {
 		$state.go('blogList');
-	}
+	};
 }]);
