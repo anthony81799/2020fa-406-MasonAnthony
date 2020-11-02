@@ -109,7 +109,7 @@ app.controller('ListController',['$http','authentication', function ListControll
 		});
 }]);
 
-app.controller('AddController', ['$http', '$routeParams', '$state', function AddController($http, $routeParams, $state) {
+app.controller('AddController', ['$http', '$routeParams', '$state','authentication', function AddController($http, $routeParams, $state, authentication) {
 	var vm = this;
 	vm.blog = {};
 	vm.pageHeader = {
@@ -121,7 +121,7 @@ app.controller('AddController', ['$http', '$routeParams', '$state', function Add
 		data.blogTitle = userForm.blogTitle.value;
 		data.blogText = userForm.blogText.value;
 
-		blogCreate($http, data)
+		blogCreate($http, authentication, data)
 			.success(function(data) {
 				vm.message = "Blog Created!";
 				$state.go('blogList');
@@ -132,7 +132,7 @@ app.controller('AddController', ['$http', '$routeParams', '$state', function Add
 	};
 }]);
 
-app.controller('EditController', [ '$http', '$routeParams', '$state', function EditController($http, $routeParams, $state) {
+app.controller('EditController', [ '$http', '$routeParams', '$state', 'authentication', function EditController($http, $routeParams, $state, authentication) {
 	var vm = this;
 	vm.blog = {};
 	vm._id = $routeParams._id;
@@ -152,9 +152,9 @@ app.controller('EditController', [ '$http', '$routeParams', '$state', function E
 	vm.submit = function() {
 		var data = vm.blog;
 		data.blogTitle = userForm.blogTitle.value;
-		data.blogText =userForm.blogText.value;
+		data.blogText = userForm.blogText.value;
 
-		blogUpdateOne($http, vm._id, data)
+		blogUpdateOne($http, authentication, vm._id, data)
 			.success(function(data) {
 				vm.message = "Blog data updated!";
 				$state.go('blogList');
@@ -165,7 +165,7 @@ app.controller('EditController', [ '$http', '$routeParams', '$state', function E
 	};
 }]);
 
-app.controller('DeleteController',['$http','$routeParams','$state',function DeleteController($http,$routeParams,$state) {
+app.controller('DeleteController',['$http','$routeParams','$state', 'authentication', function DeleteController($http, $routeParams, $state, authentication) {
 	var vm = this;
 	vm.blog = {};
 	vm._id = $routeParams._id;
@@ -173,7 +173,7 @@ app.controller('DeleteController',['$http','$routeParams','$state',function Dele
 		title:'Blog Delete'
 	};
 
-	blogGetOne($http,vm._id)
+	blogGetOne($http, vm._id)
 		.success(function(data) {
 			vm.blog = data;
 			vm.message = "Blog data found!";
@@ -187,7 +187,7 @@ app.controller('DeleteController',['$http','$routeParams','$state',function Dele
 		data.blogTitle = userForm.blogTitle.value;
 		data.blogText = userForm.blogText.value;
 
-		blogDeleteOne($http, vm._id)
+		blogDeleteOne($http, authentication, vm._id)
 	                .success(function(data) {
 				vm.message = "Blog data updated!";
 				$state.go('blogList');
