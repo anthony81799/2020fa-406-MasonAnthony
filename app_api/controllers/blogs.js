@@ -99,7 +99,15 @@ module.exports.blogUpdateOne = function(req, res){
 	Blog
 		.findOneAndUpdate(
 			{ _id: req.params.blogid},
-			{ $set: {"blogTitle": req.body.blogTitle, "blogText": req.body.blogText, "createdOn": req.body.createdOn, "authorName": req.body.authorName, "authorEmail": req.body.authorEmail}},
+			{ $set: 
+				{
+					"blogTitle": req.body.blogTitle, 
+					"blogText": req.body.blogText, 
+					"createdOn": req.body.createdOn,
+			 		"authorName": req.body.authorName, 
+				 	"authorEmail": req.body.authorEmail
+				}
+			},
 			function(err, response){
 				if(err){
 					sendJSONresponse(res, 400, err);
