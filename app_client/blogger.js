@@ -69,15 +69,21 @@ function blogGetOne($http, _id) {
 }
 
 function blogCreate($http, authentication, data) {
-	return $http.post('api/blogs/', data, { headers: { Authorization: 'Bearer ' + authentication.getToken() }});
+	return $http.post('api/blogs/', data, { headers: 
+		{ Authorization: 'Bearer ' + authentication.getToken() }
+	});
 }
 
 function blogUpdateOne($http, authentication, _id, data) {
-	return $http.put('/api/blogs/' + _id, data, { headers: { Authorization: 'Bearer ' + authentication.getToken() }});
+	return $http.put('/api/blogs/' + _id, data, { headers: 
+		{ Authorization: 'Bearer ' + authentication.getToken() }
+	});
 }
 
 function blogDeleteOne($http, authentication, _id) {
-	return $http.delete('/api/blogs/' + _id, { headers: {Authorization: 'Bearer ' + authentication.getToken() }});
+	return $http.delete('/api/blogs/' + _id, { headers: 
+		{Authorization: 'Bearer ' + authentication.getToken() }
+	});
 }
 
 /** Controllers **/
@@ -89,7 +95,8 @@ app.controller('HomeController', function HomeController() {
 	vm.message = "Welcome to my site!";
 });
 
-app.controller('ListController',['$http','authentication', function ListController($http, authentication) {
+app.controller('ListController',['$http','authentication', 
+function ListController($http, authentication) {
 	var vm = this;
 	vm.pageHeader = {
 		title : 'Blog List'
@@ -119,7 +126,9 @@ app.controller('ListController',['$http','authentication', function ListControll
 		});
 }]);
 
-app.controller('AddController', ['$http', '$routeParams', '$state','authentication', function AddController($http, $routeParams, $state, authentication) {
+app.controller('AddController', 
+['$http', '$routeParams', '$state','authentication', 
+function AddController($http, $routeParams, $state, authentication) {
 	var vm = this;
 	vm.blog = {};
 	vm.pageHeader = {
@@ -144,7 +153,9 @@ app.controller('AddController', ['$http', '$routeParams', '$state','authenticati
 	};
 }]);
 
-app.controller('EditController', [ '$http', '$routeParams', '$state', 'authentication', function EditController($http, $routeParams, $state, authentication) {
+app.controller('EditController', 
+[ '$http', '$routeParams', '$state', 'authentication', 
+function EditController($http, $routeParams, $state, authentication) {
 	var vm = this;
 	vm.blog = {};
 	vm._id = $routeParams._id;
@@ -177,7 +188,9 @@ app.controller('EditController', [ '$http', '$routeParams', '$state', 'authentic
 	};
 }]);
 
-app.controller('DeleteController',['$http','$routeParams','$state', 'authentication', function DeleteController($http, $routeParams, $state, authentication) {
+app.controller('DeleteController',
+['$http','$routeParams','$state', 'authentication', 
+function DeleteController($http, $routeParams, $state, authentication) {
 	var vm = this;
 	vm.blog = {};
 	vm._id = $routeParams._id;

@@ -7,7 +7,6 @@ var auth = jwt({
 });
 var ctrlBlogs = require('../controllers/blogs');
 var ctrlAuth = require('../controllers/authentication');
-var ctrlReviews = require('../controllers/reviews.js
 
 /* Request for blogs */
 router.get('/blogs', ctrlBlogs.blogGetAll);
@@ -18,10 +17,5 @@ router.delete('/blogs/:blogid', auth, ctrlBlogs.blogDeleteOne);
 
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
-
-router.get('/blogs/:blogid/reviews', ctrlReviews.reviewGetAll);
-router.post('/blogs/:blogid/reviews', ctrlReviews.reviewCreate);
-router.put('/blogs/:blogid/reviews/:reviewid', ctrlReviews.reviewUpdateOne);
-router.delete('blogs/:blogid/reviews/:reviewid', ctrlReviews.reviewDeleteOne);
 
 module.exports = router;
